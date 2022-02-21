@@ -1,5 +1,8 @@
-h3{
-    text-align:center;
+$small: 480px;
+$medium: 767px;
+
+h3 {
+    text-align: center;
 }
 .search-form {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
@@ -9,18 +12,24 @@ h3{
     padding: 25px;
     width: 60%;
     margin: auto;
+    @media screen and (max-width: $small) {
+        width: 100%;
+    }
+    @media screen and (max-width: $medium) {
+        width: 100%;
+    }
 }
 
-.form-btn{
+.form-btn {
     border: 1px solid rgba(0, 0, 0, 0.16);
     margin-left: 5px;
     background-color: aliceblue !important;
 }
 
-.form-btn:hover{
+.form-btn:hover {
     background-color: rgb(21, 130, 231) !important;
 }
 
-.form-btn:focus{
+.form-btn:focus {
     box-shadow: none !important;
 }

@@ -8,7 +8,7 @@
     <div class="list-item2">
         <p>{{shipment.Status}}</p>
         <p>Assigned to: {{shipment.AssignedToUserId}}</p>
-        <p *ngIf="shipment.DeliveryMethod === 'SHP'">Expected ship date: {{shipment.ExpectedShipmentDate}}</p>
+        <p *ngIf="shipment.DeliveryMethod === 'SHP'">Expected ship date: {{shipment.ExpectedShipmentDate }}</p>
         <p *ngIf="shipment.DeliveryMethod === 'PICK'">Expected pickup date: {{shipment.ExpectedShipmentDate}}</p>
     </div>
     <div class="list-item3">

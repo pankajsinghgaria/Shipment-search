@@ -1,0 +1,27 @@
+{
+    "HOME": {
+        "TITLE" : "IBM Store Engagement",
+        "SUBTITILE": "Store Associate"
+    },
+
+    "SEARCH" : {
+        "HEADING": "What do you want to do?",
+        "TITLE": "Shipment Search",
+        "ORDER": "ORDER#",
+        "SHIPMENT": "SHIPMENT#",
+        "FNAME": "FIRST NAME",
+        "LNAME": "LAST NAME",
+        "EMAIL": "EMAIL ID",
+        "PHONE": "PHONE NUMBER",
+        "SEARCH": "SEARCH",
+        "RESET": "RESET"
+    },
+
+    "RESULTS":{
+        "TITLE": "Shipment Search Results",
+        "CLOSE": "Close",
+        "RESULTS": "results",
+        "RESET": "Reset",
+        "SUBMIT": "Submit"
+    }
+}

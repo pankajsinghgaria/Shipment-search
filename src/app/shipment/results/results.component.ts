@@ -14,22 +14,21 @@ import { ShipmentSearchService } from '../services/shipment-search.service';
 })
 export class ResultsComponent implements OnInit, OnDestroy {
 
+  pipeInput ='';
   searchResults: Shipment[] = [];
   searchResults$ = new BehaviorSubject<Shipment[]>([]);
-  subscription: Subscription
+  subscription: Subscription;
 
-  @ViewChild('popContent')
-  popup: NgbPopover;
   isOpen: boolean = false;
   filterData = [
-    { id: 0, name: 'Ready For Backroom Pick' },
-    { id: 1, name: 'Backroom Pick in Progress' },
-    { id: 2, name: 'Ready For Customer Pickup' },
-    { id: 3, name: 'Ready For Packing' },
-    { id: 4, name: 'Packing in Progress' },
-    { id: 5, name: 'Packed' },
-    { id: 6, name: 'Shipped/Picked' },
-    { id: 7, name: 'Cancelled' }
+    { selected: false, value:'PICK', name: 'Ready For Backroom Pick' },
+    { selected: false, value:'PICK', name: 'Backroom Pick in Progress' },
+    { selected: false, value:'PICK', name: 'Ready For Customer Pickup' },
+    { selected: false, value:'SHP', name: 'Ready For Packing' },
+    { selected: false, value:'SHP', name: 'Packing in Progress' },
+    { selected: false, value:'SHP', name: 'Packed' },
+    { selected: false, value:'PICK',name: 'Shipped/Picked' },
+    { selected: false, value:'PICK', name: 'Cancelled' }
   ];
 
   constructor(private shipmentSearchService: ShipmentSearchService, private router: Router, private previousRouteService: PreviousRouteService) { }
@@ -39,19 +38,14 @@ export class ResultsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(filterForm: NgForm) {
-    console.log(filterForm.value)
-  }
-
-  filterclicked() {
-    // !this.isOpen;
-    // if (!this.isOpen) {
-    //   this.popup.open()
-    //   !this.isOpen
-    // }
-    // else {
-    //   this.popup.close();
-    //   !this.isOpen
-    // }
+    console.log(filterForm.value);
+    if(filterForm.value.PICK && !filterForm.value.SHP){
+      this.pipeInput = 'PICK';
+    } else if(!filterForm.value.PICK && filterForm.value.SHP){
+      this.pipeInput = 'SHP';
+    } else {
+      this.pipeInput = '';
+    }
   }
 
   onScroll() {

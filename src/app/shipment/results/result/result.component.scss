@@ -1,10 +1,28 @@
-.list-container{
+$small: 480px;
+$medium: 767px;
+.list-container {
     padding: 10px;
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid black;
+    @media screen and (max-width: $small) {
+        .list-container :nth-child(3){
+            order: 2;
+        }
+        flex-wrap: wrap;
+        justify-content: space-between;
+     }
 }
+@media screen and (max-width: $small) {
+    .list-container :nth-child(2){
+        order: 1;
+    }
+ }
 
-p{
+ .list-container div{
+     margin-bottom: 10px;
+ }
+
+p {
     margin: 0px;
 }

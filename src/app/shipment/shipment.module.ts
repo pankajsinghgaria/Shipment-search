@@ -10,7 +10,14 @@ import { ResultComponent } from './results/result/result.component';
 import { ProductsComponent } from './summary/products/products.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FilterShipmentPipe } from './filter-shipment.pipe';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -18,14 +25,22 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ResultsComponent,
     SummaryComponent,
     ResultComponent,
-    ProductsComponent
+    ProductsComponent,
+    FilterShipmentPipe
   ],
   imports: [
     CommonModule,
     FormsModule,
     ShipmentRoutingModule,
     NgbModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ], 
   providers: [
   ]

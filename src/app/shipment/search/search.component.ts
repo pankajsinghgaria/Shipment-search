@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Search } from '../model/search';
 import { Shipment } from '../model/shipment';
@@ -19,7 +20,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   shipmentSearchData: Search;
 
-  constructor(private router: Router, private searchShipment: ShipmentSearchService) { }
+  constructor(private router: Router, private searchShipment: ShipmentSearchService, public translate: TranslateService) {
+    translate.addLangs(['en', 'fr']);
+    translate.setDefaultLang('en');
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang?.match(/en|fr/) ? browserLang : 'en')
+  }
 
   ngOnInit(): void {
     this.shipmentSearchData = {
@@ -49,7 +55,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         }
       });
       this.resetForm()
-    },0);
+    }, 0);
   }
 
   resetForm() {

@@ -2,20 +2,20 @@
     <div class="nav-container">
         <div>
             <i class="fas fa-angle-left" (click)="goBack()"></i>
-            <span class="heading">Shipment Search Results</span>
+            <span class="heading">{{'RESULTS.TITLE' | translate}}</span>
         </div>
         <div style="display: flex;">
-            <button class="btn btn-default form-btn" (click)="close()">Close</button>
+            <button class="btn btn-default form-btn" (click)="close()">{{'RESULTS.CLOSE' | translate}}</button>
         </div>
     </div>
-    <div *ngIf="searchResults$ | async as searchResults">
+    <div *ngIf="(searchResults$ | async) | filterShipment : pipeInput as searchResults">
         <div class="sub-container">
             <div>
                 <span class="result-number">{{searchResults.length}}</span>
-                <span> results</span>
+                <span> {{'RESULTS.RESULTS' | translate}}</span>
             </div>
             <div>
-                <i class="fa fa-filter" [ngbPopover]="popContent" popoverTitle="Fancy content" (click)="filterclicked()" [autoClose]="false"></i>
+                <i class="fa fa-filter" [ngbPopover]="popContent" popoverTitle="Refine"  [autoClose]="false"></i>
             </div>
         </div>
         <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScroll()"
@@ -30,13 +30,13 @@
 
 
 <ng-template #popContent>
-    <p>Refine</p>
     <div>
         <form (ngSubmit)="onSubmit(filterForm)" #filterForm="ngForm">
             <div *ngFor="let data of filterData">
-                <input type="checkbox" ngModel name="{{data.id}}">{{data.name}}
+                <label><input type="checkbox" [(ngModel)]="data.selected" name="{{data.value}}"> {{data.name}}</label>
             </div>
-            <button type="submit">submit</button>
+            <button class="btn btn-default form-btn" type="button" (click)="filterForm.resetForm()">{{'RESULTS.RESET' | translate}}</button>
+            <button class="btn btn-default form-btn" type="submit">{{'RESULTS.SUBMIT' | translate}}</button>
         </form>
     </div>
 </ng-template>
