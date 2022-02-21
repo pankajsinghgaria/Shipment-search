@@ -1,0 +1,84 @@
+<div class="summary-screen">
+    <div class="nav-container">
+        <div style="display: flex;">
+            <i class="fas fa-angle-left" (click)="goBack()"></i>
+            <div class="heading">
+                <span>Shipment Summary</span><br>
+                <span>{{shipmentNumber}}</span>
+            </div>
+        </div>
+        <div style="display: flex;">
+            <button class="btn btn-default form-btn" (click)="close()">Close</button>
+        </div>
+    </div>
+    <div *ngIf="shipmentDetails$ | async as shipmentDetails">
+
+        <div class="info-wrapper">
+            <div>
+                <p>{{shipmentDetails.Status}}</p>
+            </div>
+
+            <div class="info-container">
+                <div>
+                    <div>
+                        <p>Shipment number</p>
+                        <p>{{shipmentDetails.ShipmentNo}}</p>
+                    </div>
+                    <div *ngIf="shipmentDetails.DeliveryMethod === 'SHP' && !isHidden">
+                        <p>Carrier</p>
+                        <p>{{shipmentDetails.ScacAndService}}</p>
+                    </div>
+                    <div *ngIf="!isHidden">
+                        <p>Assigned to</p>
+                        <p>{{shipmentDetails.AssignedToUserId}}</p>
+                    </div>
+                    <div>
+                        <p>Ship to</p>
+                        <p  *ngIf="!isHidden">{{shipmentDetails.ShipToName}}</p>
+                        <p  *ngIf="!isHidden">{{shipmentDetails.ShipToAddressLine1}}</p>
+                        <p  *ngIf="!isHidden">{{shipmentDetails.ShipToAddressLine2}}</p>
+                        <p>{{shipmentDetails.ShipToAddressLine3}}</p>
+                        <p  *ngIf="!isHidden">{{shipmentDetails.ShipToCountry}}</p>
+                    </div>
+
+                </div>
+                <div>
+                    <div *ngIf="shipmentDetails.DeliveryMethod === 'SHP'">
+                        <p>Expected ship date</p>
+                        <p>{{shipmentDetails.ExpectedShipmentDate}}</p>
+                    </div>
+                    <div *ngIf="shipmentDetails.DeliveryMethod === 'PICK'">
+                        <p>Expected pick date</p>
+                        <p>{{shipmentDetails.ExpectedShipmentDate}}</p>
+                    </div>
+                    <div  *ngIf="!isHidden">
+                        <p>Customer info</p>
+                        <p>{{shipmentDetails.FirstName}} {{shipmentDetails.LastName}}</p>
+                        <p>{{shipmentDetails.DayPhone}}</p>
+                        <p>{{shipmentDetails.EMailID}}</p>
+                    </div>
+                    <div  *ngIf="!isHidden">
+                        <p>Bill to</p>
+                        <p>{{shipmentDetails.BillToName}}</p>
+                        <p>{{shipmentDetails.BillToAddressLine1}}</p>
+                        <p>{{shipmentDetails.BillToAddressLine2}}</p>
+                        <p>{{shipmentDetails.BillToAddressLine3}}</p>
+                        <p>{{shipmentDetails.BillToCountry}}</p>
+                    </div>
+
+                </div>
+            </div>
+            <span class="hide" *ngIf="!isHidden" (click)="isHidden=!isHidden">Hide info</span>
+            <span class="hide" *ngIf="isHidden" (click)="isHidden=!isHidden">Show info</span>
+        </div>
+        <div class="prod-bar">
+            <div class="prod-count">
+                <span>Products ({{shipmentDetails.Products.length}})</span>
+            </div>
+        </div>
+        <div class="products">
+            <app-products class="prod" *ngFor="let product of shipmentDetails.Products" [productDetails]="product"></app-products>
+        </div>
+
+    </div>
+</div>

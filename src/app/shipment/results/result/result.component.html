@@ -1,0 +1,20 @@
+<li class="list-container">
+    <div class="list-item1">
+        <p>{{shipment.OrderNo}}</p>
+        <p>{{shipment.TotalNumberOfRecords}} Products</p>
+        <p *ngIf="shipment.DeliveryMethod === 'SHP'">Carrier: {{shipment.ScacAndService}}</p>
+        <p> Shipment# <a [routerLink]="['/summary',shipment.ShipmentNo]"> {{shipment.ShipmentNo}}</a></p>
+    </div>
+    <div class="list-item2">
+        <p>{{shipment.Status}}</p>
+        <p>Assigned to: {{shipment.AssignedToUserId}}</p>
+        <p *ngIf="shipment.DeliveryMethod === 'SHP'">Expected ship date: {{shipment.ExpectedShipmentDate}}</p>
+        <p *ngIf="shipment.DeliveryMethod === 'PICK'">Expected pickup date: {{shipment.ExpectedShipmentDate}}</p>
+    </div>
+    <div class="list-item3">
+        <p>Customer info</p>
+        <p>{{shipment.FirstName}} {{shipment.LastName}}</p>
+        <p>{{shipment.DayPhone}}</p>
+        <p>{{shipment.EMailID}}</p>
+    </div>
+</li>

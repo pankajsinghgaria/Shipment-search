@@ -1,0 +1,42 @@
+<div class="result-screen">
+    <div class="nav-container">
+        <div>
+            <i class="fas fa-angle-left" (click)="goBack()"></i>
+            <span class="heading">Shipment Search Results</span>
+        </div>
+        <div style="display: flex;">
+            <button class="btn btn-default form-btn" (click)="close()">Close</button>
+        </div>
+    </div>
+    <div *ngIf="searchResults$ | async as searchResults">
+        <div class="sub-container">
+            <div>
+                <span class="result-number">{{searchResults.length}}</span>
+                <span> results</span>
+            </div>
+            <div>
+                <i class="fa fa-filter" [ngbPopover]="popContent" popoverTitle="Fancy content" (click)="filterclicked()" [autoClose]="false"></i>
+            </div>
+        </div>
+        <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScroll()"
+            [scrollWindow]="false" style="max-height: calc(100vh - 170px);
+            overflow: auto;">
+            <ul>
+                <app-result *ngFor="let searchResult of searchResults" [shipment]="searchResult"></app-result>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #popContent>
+    <p>Refine</p>
+    <div>
+        <form (ngSubmit)="onSubmit(filterForm)" #filterForm="ngForm">
+            <div *ngFor="let data of filterData">
+                <input type="checkbox" ngModel name="{{data.id}}">{{data.name}}
+            </div>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+</ng-template>
