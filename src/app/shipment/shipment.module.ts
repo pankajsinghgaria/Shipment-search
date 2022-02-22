@@ -10,7 +10,7 @@ import { ResultComponent } from './results/result/result.component';
 import { ProductsComponent } from './summary/products/products.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { FilterShipmentPipe } from './filter-shipment.pipe';
+import { FilterShipmentPipe } from './pipe/filter-shipment.pipe';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';

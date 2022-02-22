@@ -23,8 +23,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private searchShipment: ShipmentSearchService, public translate: TranslateService) {
     translate.addLangs(['en', 'fr']);
     translate.setDefaultLang('en');
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang?.match(/en|fr/) ? browserLang : 'en')
+    // const browserLang = translate.getBrowserLang();
+    // translate.use(browserLang?.match(/en|fr/) ? browserLang : 'en');
+    translate.use('en');
   }
 
   ngOnInit(): void {

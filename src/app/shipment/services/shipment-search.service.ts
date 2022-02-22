@@ -27,12 +27,10 @@ export class ShipmentSearchService {
           let shipmentData: Shipment[];
           shipmentData = result.Shipments.Shipment
             .filter((res: any) => {
-              if (data.DayPhone === ""
-                && data.EMailID === ""
-                && data.FirstName === ""
-                && data.LastName === ""
-                && data.OrderNo === ""
-                && data.ShipmentNo === "") {
+              if ((data.DayPhone === "" && data.EMailID === "" && data.FirstName === ""
+                && data.LastName === "" && data.OrderNo === "" && data.ShipmentNo === "") ||
+                (!data.DayPhone && !data.EMailID && !data.FirstName
+                  && !data.LastName && !data.OrderNo && !data.ShipmentNo)) {
                 return true;
               } else if (data.DayPhone === res.BillToAddress.DayPhone
                 || data.EMailID === res.BillToAddress.EMailID
